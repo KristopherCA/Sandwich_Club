@@ -17,29 +17,30 @@ public class JsonUtils {
 
         try {
             //create JSON Sandwich object to get JSON data
-            JSONObject swObject = new JSONObject(json);
+            JSONObject sandwichObject = new JSONObject(json);
 
             //get JSON objects from JSON data
-            JSONObject swName = swObject.getJSONObject("name");
+            JSONObject sandwichName = sandwichObject.optJSONObject("name");
 
             //get JSON string from JSON data
-             String swMainName = swName.getString("mainName");
+             String sandwichMainName = sandwichName.optString("mainName");
 
             //get JSON Array and convert JSON array to java list
-            JSONArray akaArray = swName.getJSONArray("alsoKnownAs");
-            List<String> swAKA = convertArray(akaArray);
+            JSONArray alsoknownasArray = sandwichName.optJSONArray("alsoKnownAs");
+            List<String> sandwichAlsoKnownAs = convertArray(alsoknownasArray);
+
 
             //get rest of JSON strings from JSON data
-            String swPlaceOfOrigin = swObject.getString("placeOfOrigin");
-            String swDescription = swObject.getString("description");
-            String swImage = swObject.getString("image");
+            String sandwichPlaceOfOrigin = sandwichObject.optString("placeOfOrigin");
+            String sandwichDescription = sandwichObject.optString("description");
+            String sandwichImage = sandwichObject.optString("image");
 
             //get JSON Array and convert JSON array to java list
-            JSONArray ingredientsArray = swObject.getJSONArray("ingredients");
-            List<String> swIngredients = convertArray(ingredientsArray);
+            JSONArray ingredientsArray = sandwichObject.optJSONArray("ingredients");
+            List<String> sandwichIngredients = convertArray(ingredientsArray);
 
             //create a new sandwhich object to return JSON data
-            sandwich = new Sandwich(swMainName, swAKA, swPlaceOfOrigin, swDescription, swImage, swIngredients);
+            sandwich = new Sandwich(sandwichMainName, sandwichAlsoKnownAs, sandwichPlaceOfOrigin, sandwichDescription, sandwichImage, sandwichIngredients);
 
 
         } catch (JSONException ex) {
